@@ -15,6 +15,8 @@ const proTips = [
   { icon: '💵', tip: 'Cash only at many smaller places. Find an ATM before you head out. A 5-10% tip is appreciated for good service.' },
 ]
 
+const restaurantImages = ['food', 'harbour', 'coast', 'riviera', 'boats', 'mountains'] as const
+
 export default function RestaurantsPage() {
   const { t } = useLanguage()
   const [showProTips, setShowProTips] = useState(false)
@@ -36,7 +38,7 @@ export default function RestaurantsPage() {
   ] as const
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A]">
+    <div className="min-h-screen bg-[#F8F5F0]">
       {/* Hero */}
       <div className="relative h-[50vh] overflow-hidden">
         <Image src={images.food} alt="Albanian seafood" fill className="object-cover" priority sizes="100vw" />
@@ -57,7 +59,7 @@ export default function RestaurantsPage() {
               className={`flex-shrink-0 px-4 py-2 text-sm border transition-colors min-h-[44px] whitespace-nowrap ${
                 activeFilter === f.key
                   ? 'bg-[#2A7F8A] border-[#2A7F8A] text-[#F8F5F0]'
-                  : 'border-[#F8F5F0]/20 text-[#F8F5F0]/60 hover:border-[#2A7F8A]/50'
+                  : 'border-[#1A1A1A]/20 text-[#1A1A1A]/60 hover:border-[#2A7F8A]/50'
               }`}
             >
               {f.label}
@@ -78,7 +80,7 @@ export default function RestaurantsPage() {
         {/* Restaurant cards */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
           <AnimatePresence>
-            {filtered.map((r) => (
+            {filtered.map((r, i) => (
               <motion.div
                 key={r.id}
                 layout
@@ -101,51 +103,76 @@ export default function RestaurantsPage() {
                   aria-label={`${r.name} — tap to see what to order`}
                 >
                   {/* Front */}
-                  <div className="border border-[#F8F5F0]/10 p-5 bg-[#1A1A1A]" style={{ backfaceVisibility: 'hidden' }}>
+                  <div
+                    className="border border-[#1A1A1A]/10 bg-[#F8F5F0] overflow-hidden"
+                    style={{ backfaceVisibility: 'hidden' }}
+                  >
+                    <div className="relative h-40 overflow-hidden">
+                      <Image
+                        src={images[restaurantImages[i % restaurantImages.length]]}
+                        alt={r.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    </div>
+                    <div className="p-5">
                     <div className="flex items-start justify-between mb-2">
                       <span className={`text-xs px-2 py-0.5 capitalize ${
                         r.tier === 'fine' ? 'text-[#2A7F8A] bg-[#2A7F8A]/10' :
-                        r.tier === 'local' ? 'text-amber-400 bg-amber-400/10' :
-                        'text-blue-400 bg-blue-400/10'
+                        r.tier === 'local' ? 'text-amber-700 bg-amber-700/10' :
+                        'text-sky-700 bg-sky-700/10'
                       }`}>{r.tier}</span>
                       {r.sunsetView && (
-                        <span className="text-xs text-orange-400 animate-pulse">Sunset view</span>
+                        <span className="text-xs text-orange-600 animate-pulse">Sunset view</span>
                       )}
                     </div>
-                    <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#F8F5F0] mb-1">{r.name}</h2>
-                    <p className="text-xs text-[#F8F5F0]/40 mb-3">{r.address}</p>
-                    <p className="text-[#F8F5F0]/70 text-sm leading-relaxed mb-3">{r.description}</p>
+                    <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#1A1A1A] mb-1">{r.name}</h2>
+                    <p className="text-xs text-[#1A1A1A]/40 mb-3">{r.address}</p>
+                    <p className="text-[#1A1A1A]/70 text-sm leading-relaxed mb-3">{r.description}</p>
                     {r.cashOnly && (
-                      <span className="text-xs text-yellow-400 bg-yellow-400/10 px-2 py-0.5">Cash only</span>
+                      <span className="text-xs text-amber-700 bg-amber-700/10 px-2 py-0.5">Cash only</span>
                     )}
-                    <p className="text-[#F8F5F0]/30 text-xs mt-3">Tap to see what to order</p>
+                    <p className="text-[#1A1A1A]/30 text-xs mt-3">Tap to see what to order</p>
                     {r.urgency && (
                       <div className="mt-3 border border-[#2A7F8A]/30 p-2">
                         <p className="text-xs text-[#2A7F8A]">{r.urgency}</p>
                       </div>
                     )}
+                    </div>
                   </div>
 
                   {/* Back */}
                   <div
-                    className="absolute inset-0 border border-[#2A7F8A]/30 p-5 bg-[#0D0D0D] flex flex-col justify-center"
+                    className="absolute inset-0 border border-[#2A7F8A]/30 p-5 bg-[#FFFFFF] flex flex-col justify-center"
                     style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
                   >
                     <p className="text-xs text-[#2A7F8A] uppercase tracking-widest mb-3">Order this</p>
                     <ul className="space-y-2">
                       {r.orderThis.map((dish) => (
-                        <li key={dish} className="text-[#F8F5F0] text-sm flex gap-2">
+                        <li key={dish} className="text-[#1A1A1A] text-sm flex gap-2">
                           <span className="text-[#2A7F8A]">—</span>{dish}
                         </li>
                       ))}
                     </ul>
-                    <p className="text-[#F8F5F0]/30 text-xs mt-4">Tap to flip back</p>
+                    <p className="text-[#1A1A1A]/30 text-xs mt-4">Tap to flip back</p>
                   </div>
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Full bleed image between sections */}
+        <div className="my-12 -mx-4 md:-mx-8 relative h-48 md:h-64 overflow-hidden">
+          <Image src={images.riviera} alt="Saranda waterfront" fill className="object-cover" sizes="100vw" />
+          <div className="absolute inset-0 bg-[#1A1A1A]/50" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <p className="font-[family-name:var(--font-playfair)] text-xl md:text-3xl text-[#F8F5F0] italic">
+              &ldquo;Ask to see the catch before you order.&rdquo;
+            </p>
+          </div>
+        </div>
 
         <CommentThread slug="restaurants" />
       </div>
@@ -166,17 +193,17 @@ export default function RestaurantsPage() {
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed bottom-0 left-0 right-0 md:left-auto md:right-0 md:top-0 md:bottom-0 md:w-80 bg-[#0D0D0D] border-t md:border-t-0 md:border-l border-[#F8F5F0]/10 z-50 p-6 overflow-y-auto"
+              className="fixed bottom-0 left-0 right-0 md:left-auto md:right-0 md:top-0 md:bottom-0 md:w-80 bg-[#FFFFFF] border-t md:border-t-0 md:border-l border-[#1A1A1A]/10 z-50 p-6 overflow-y-auto"
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#F8F5F0]">{t.proTips}</h2>
-                <button onClick={() => setShowProTips(false)} className="text-[#F8F5F0]/40 p-2 min-h-[44px]">✕</button>
+                <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#1A1A1A]">{t.proTips}</h2>
+                <button onClick={() => setShowProTips(false)} className="text-[#1A1A1A]/40 p-2 min-h-[44px]">✕</button>
               </div>
               <div className="space-y-5">
                 {proTips.map((tip) => (
                   <div key={tip.icon} className="flex gap-3">
                     <span className="text-xl flex-shrink-0">{tip.icon}</span>
-                    <p className="text-[#F8F5F0]/70 text-sm leading-relaxed">{tip.tip}</p>
+                    <p className="text-[#1A1A1A]/70 text-sm leading-relaxed">{tip.tip}</p>
                   </div>
                 ))}
               </div>

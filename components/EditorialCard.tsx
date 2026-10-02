@@ -35,7 +35,7 @@ export default function EditorialCard({
     <Link
       href={href}
       onClick={handleTap}
-      className="group relative block overflow-hidden bg-[#1A1A1A]"
+      className="group relative block overflow-hidden bg-[#F8F5F0]"
       data-cursor="hover"
     >
       {/* Image */}
@@ -58,10 +58,10 @@ export default function EditorialCard({
         >
           {category}
         </span>
-        <h3 className="font-playfair text-xl md:text-2xl text-[#F8F5F0] mb-2 leading-tight line-clamp-2">
+        <h3 className="font-playfair text-xl md:text-2xl text-[#1A1A1A] mb-2 leading-tight line-clamp-2">
           {title}
         </h3>
-        <p className="text-sm text-[#F8F5F0]/60 line-clamp-2 leading-relaxed">
+        <p className="text-sm text-[#1A1A1A]/60 line-clamp-2 leading-relaxed">
           {description}
         </p>
       </div>

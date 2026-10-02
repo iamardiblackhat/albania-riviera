@@ -1,8 +1,10 @@
 'use client'
 
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import images from '@/data/images.json'
 import { useLanguage } from '@/context/LanguageContext'
 
 interface PlanItem {
@@ -72,10 +74,18 @@ export default function MyDayPage() {
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A] pt-20 px-4 md:px-8 pb-16">
-      <div className="max-w-3xl mx-auto">
-        <div className="flex items-baseline justify-between mb-8">
+    <div className="min-h-screen bg-[#F8F5F0] pb-16">
+      {/* Hero band */}
+      <div className="relative h-[38vh] overflow-hidden">
+        <Image src={images.coast} alt="Albanian Riviera" fill className="object-cover" sizes="100vw" priority />
+        <div className="absolute inset-0 bg-[#1A1A1A]/45" />
+        <div className="absolute bottom-0 left-0 right-0 px-4 md:px-8 pb-8">
           <h1 className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl text-[#F8F5F0]">{t.myDay}</h1>
+        </div>
+      </div>
+
+      <div className="max-w-3xl mx-auto px-4 md:px-8 pt-10">
+        <div className="flex items-baseline justify-end mb-8">
           {items.length > 0 && (
             <button
               onClick={shareLink}
@@ -89,7 +99,7 @@ export default function MyDayPage() {
 
         {items.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-[#F8F5F0]/40 text-sm mb-4">
+            <p className="text-[#1A1A1A]/40 text-sm mb-4">
               Bookmark activities and restaurants to build your day.
             </p>
             <div className="flex flex-col gap-2 items-center">
@@ -104,7 +114,7 @@ export default function MyDayPage() {
             {/* Unscheduled */}
             {items.filter((i) => i.slot === 'unscheduled').length > 0 && (
               <div>
-                <p className="text-xs text-[#F8F5F0]/40 uppercase tracking-widest mb-3">Not yet scheduled</p>
+                <p className="text-xs text-[#1A1A1A]/40 uppercase tracking-widest mb-3">Not yet scheduled</p>
                 <div className="space-y-2">
                   <AnimatePresence>
                     {items.filter((i) => i.slot === 'unscheduled').map((item) => (
@@ -114,11 +124,11 @@ export default function MyDayPage() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="flex items-center justify-between bg-[#F8F5F0]/5 p-4 border border-[#F8F5F0]/10"
+                        className="flex items-center justify-between bg-[#1A1A1A]/5 p-4 border border-[#1A1A1A]/10"
                       >
                         <div>
                           <span className="text-xs text-[#2A7F8A] block mb-0.5">{item.type}</span>
-                          <Link href={item.slug} className="text-[#F8F5F0] text-sm font-medium hover:text-[#2A7F8A] transition-colors">
+                          <Link href={item.slug} className="text-[#1A1A1A] text-sm font-medium hover:text-[#2A7F8A] transition-colors">
                             {item.name}
                           </Link>
                         </div>
@@ -126,7 +136,7 @@ export default function MyDayPage() {
                           <select
                             value="unscheduled"
                             onChange={(e) => moveToSlot(item.id, e.target.value as PlanItem['slot'])}
-                            className="bg-[#1A1A1A] border border-[#F8F5F0]/20 text-[#F8F5F0]/60 text-xs px-2 py-1 min-h-[44px]"
+                            className="bg-[#F8F5F0] border border-[#1A1A1A]/20 text-[#1A1A1A]/60 text-xs px-2 py-1 min-h-[44px]"
                             aria-label={`Move ${item.name} to a time slot`}
                           >
                             <option value="unscheduled">Move to...</option>
@@ -136,7 +146,7 @@ export default function MyDayPage() {
                           </select>
                           <button
                             onClick={() => removeItem(item.id)}
-                            className="text-[#F8F5F0]/20 hover:text-red-400 transition-colors p-1 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                            className="text-[#1A1A1A]/20 hover:text-red-400 transition-colors p-1 min-w-[44px] min-h-[44px] flex items-center justify-center"
                             aria-label={`Remove ${item.name}`}
                           >
                             ✕
@@ -156,10 +166,10 @@ export default function MyDayPage() {
                 <div key={slot.key}>
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-xs text-[#2A7F8A] uppercase tracking-widest">{slot.label}</span>
-                    <div className="flex-1 h-px bg-[#F8F5F0]/5" />
+                    <div className="flex-1 h-px bg-[#1A1A1A]/5" />
                   </div>
                   {slotItems.length === 0 && (
-                    <p className="text-[#F8F5F0]/20 text-sm py-3">Nothing here yet</p>
+                    <p className="text-[#1A1A1A]/20 text-sm py-3">Nothing here yet</p>
                   )}
                   <div className="space-y-2">
                     <AnimatePresence>
@@ -174,7 +184,7 @@ export default function MyDayPage() {
                         >
                           <div>
                             <span className="text-xs text-[#2A7F8A] block mb-0.5">{item.type}</span>
-                            <Link href={item.slug} className="text-[#F8F5F0] text-sm font-medium hover:text-[#2A7F8A] transition-colors">
+                            <Link href={item.slug} className="text-[#1A1A1A] text-sm font-medium hover:text-[#2A7F8A] transition-colors">
                               {item.name}
                             </Link>
                           </div>
@@ -182,7 +192,7 @@ export default function MyDayPage() {
                             <select
                               value={item.slot}
                               onChange={(e) => moveToSlot(item.id, e.target.value as PlanItem['slot'])}
-                              className="bg-[#1A1A1A] border border-[#F8F5F0]/20 text-[#F8F5F0]/60 text-xs px-2 py-1 min-h-[44px]"
+                              className="bg-[#F8F5F0] border border-[#1A1A1A]/20 text-[#1A1A1A]/60 text-xs px-2 py-1 min-h-[44px]"
                               aria-label={`Move ${item.name}`}
                             >
                               <option value="morning">{t.morning}</option>
@@ -192,7 +202,7 @@ export default function MyDayPage() {
                             </select>
                             <button
                               onClick={() => removeItem(item.id)}
-                              className="text-[#F8F5F0]/20 hover:text-red-400 transition-colors p-1 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                              className="text-[#1A1A1A]/20 hover:text-red-400 transition-colors p-1 min-w-[44px] min-h-[44px] flex items-center justify-center"
                               aria-label={`Remove ${item.name}`}
                             >
                               ✕

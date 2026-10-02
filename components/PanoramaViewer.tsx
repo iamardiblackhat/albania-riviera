@@ -170,7 +170,7 @@ export default function PanoramaViewer(props: PanoramaViewerProps) {
 
   return (
     <div ref={containerRef}>
-      {ready === 'loading' && <div className="w-full h-[50vh] bg-[#1A1A1A]" />}
+      {ready === 'loading' && <div className="w-full h-[50vh] bg-[#1A1A1A]/5 animate-pulse" />}
       {ready === 'unsupported' && <PanoramaFallback {...props} />}
       {ready === 'supported' && visible && <PanoramaCanvas {...props} />}
     </div>

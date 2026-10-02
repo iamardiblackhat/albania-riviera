@@ -11,6 +11,8 @@ export const metadata: Metadata = {
 
 const atvTours = activities.filter((a) => a.category === 'atv')
 
+const tourImages = ['atv', 'mountains', 'lakes', 'blue-eye', 'coast'] as const
+
 const waypoints = [
   { name: 'Mesopotam Village', note: 'Start. Safety briefing at Monastery of Saint Nicholas, 13th century.' },
   { name: 'Bistrica River', note: 'Ancient Byzantine trading route along the bank.' },
@@ -24,7 +26,7 @@ const waypoints = [
 
 export default function ATVPage() {
   return (
-    <div className="min-h-screen bg-[#1A1A1A]">
+    <div className="min-h-screen bg-[#F8F5F0]">
       {/* Hero */}
       <div className="relative h-[60vh] overflow-hidden">
         <Image src={images.atv} alt="ATV tours Albania" fill className="object-cover" priority sizes="100vw" />
@@ -42,52 +44,93 @@ export default function ATVPage() {
         <div className="border border-[#8B5A2B]/30 p-4 md:p-6 mb-12">
           <h2 className="text-[#8B5A2B] text-sm uppercase tracking-widest mb-3">Requirements</h2>
           <ul className="space-y-1">
-            <li className="text-[#F8F5F0]/70 text-sm">Drivers must be 18 or older with a valid driving license</li>
-            <li className="text-[#F8F5F0]/70 text-sm">Passengers can be from age 8 when accompanied by an adult</li>
-            <li className="text-[#F8F5F0]/70 text-sm">450cc single or double-rider ATVs, or 700cc for experienced riders</li>
+            <li className="text-[#1A1A1A]/70 text-sm">Drivers must be 18 or older with a valid driving license</li>
+            <li className="text-[#1A1A1A]/70 text-sm">Passengers can be from age 8 when accompanied by an adult</li>
+            <li className="text-[#1A1A1A]/70 text-sm">450cc single or double-rider ATVs, or 700cc for experienced riders</li>
           </ul>
         </div>
 
+        {/* Full bleed */}
+        <div className="relative h-[38vh] -mx-4 md:-mx-8 mb-12 overflow-hidden">
+          <Image src={images.mountains} alt="Albanian mountains" fill className="object-cover" sizes="100vw" />
+          <div className="absolute inset-0 bg-[#1A1A1A]/45" />
+          <div className="absolute inset-0 flex items-center justify-center px-6">
+            <p className="font-[family-name:var(--font-playfair)] text-xl md:text-3xl text-[#F8F5F0] text-center max-w-2xl leading-snug">
+              You start on tarmac. By midday you are fording the Bistrica.
+            </p>
+          </div>
+        </div>
+
         {/* Tour cards */}
-        <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-[#F8F5F0] mb-6">Tours</h2>
+        <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-[#1A1A1A] mb-6">Tours</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
-          {atvTours.map((tour) => (
-            <div key={tour.id} className="border border-[#F8F5F0]/10 p-5 hover:border-[#8B5A2B]/40 transition-colors">
-              <div className="flex items-start justify-between mb-2">
-                <div>
-                  <span className="text-xs text-[#8B5A2B] uppercase tracking-widest block mb-1">{tour.operator}</span>
-                  <h3 className="font-[family-name:var(--font-playfair)] text-xl text-[#F8F5F0]">{tour.name}</h3>
-                </div>
-                <span className={`text-xs px-2 py-1 capitalize ${
-                  tour.difficulty === 'easy' ? 'text-green-400 bg-green-400/10' :
-                  tour.difficulty === 'moderate' ? 'text-yellow-400 bg-yellow-400/10' :
-                  'text-red-400 bg-red-400/10'
-                }`}>
-                  {tour.difficulty}
-                </span>
+          {atvTours.map((tour, i) => (
+            <div
+              key={tour.id}
+              className="border border-[#1A1A1A]/10 bg-[#FFFFFF] overflow-hidden hover:border-[#8B5A2B]/50 transition-colors"
+            >
+              <div className="relative h-44 overflow-hidden">
+                <Image
+                  src={images[tourImages[i % tourImages.length]]}
+                  alt={tour.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
-              <p className="text-[#F8F5F0]/60 text-sm mb-3">{tour.description}</p>
-              <div className="flex flex-wrap gap-3 text-xs text-[#F8F5F0]/40">
-                {tour.distanceKm && <span>{tour.distanceKm}km</span>}
-                <span>{tour.duration}</span>
-                {tour.priceFrom && <span>From {tour.priceFrom}</span>}
-              </div>
-              {tour.amenities && (
-                <div className="mt-3 flex flex-wrap gap-1">
-                  {tour.amenities.map((a) => (
-                    <span key={a} className="text-xs bg-[#F8F5F0]/5 text-[#F8F5F0]/50 px-2 py-0.5">{a}</span>
-                  ))}
+              <div className="p-5">
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <div>
+                    <span className="text-xs text-[#8B5A2B] uppercase tracking-widest block mb-1">{tour.operator}</span>
+                    <h3 className="font-[family-name:var(--font-playfair)] text-xl text-[#1A1A1A]">{tour.name}</h3>
+                  </div>
+                  <span
+                    className={`text-xs px-2 py-1 capitalize flex-shrink-0 ${
+                      tour.difficulty === 'easy'
+                        ? 'text-emerald-700 bg-emerald-700/10'
+                        : tour.difficulty === 'moderate'
+                          ? 'text-amber-700 bg-amber-700/10'
+                          : 'text-red-700 bg-red-700/10'
+                    }`}
+                  >
+                    {tour.difficulty}
+                  </span>
                 </div>
-              )}
+                <p className="text-[#1A1A1A]/60 text-sm mb-3">{tour.description}</p>
+                <div className="flex flex-wrap gap-3 text-xs text-[#1A1A1A]/45">
+                  {tour.distanceKm && <span>{tour.distanceKm}km</span>}
+                  <span>{tour.duration}</span>
+                  {tour.priceFrom && <span>From {tour.priceFrom}</span>}
+                </div>
+                {tour.amenities && (
+                  <div className="mt-3 flex flex-wrap gap-1">
+                    {tour.amenities.map((a) => (
+                      <span key={a} className="text-xs bg-[#1A1A1A]/5 text-[#1A1A1A]/55 px-2 py-0.5">
+                        {a}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
 
+        {/* Route imagery */}
+        <div className="grid grid-cols-2 gap-2 md:gap-3 mb-10 -mx-4 md:-mx-8">
+          <div className="relative h-48 md:h-72 overflow-hidden">
+            <Image src={images.lakes} alt="Bistrica Lake on the ATV route" fill className="object-cover" sizes="50vw" />
+          </div>
+          <div className="relative h-48 md:h-72 overflow-hidden">
+            <Image src={images['blue-eye']} alt="Blue Eye spring" fill className="object-cover" sizes="50vw" />
+          </div>
+        </div>
+
         {/* Byzantine Route Timeline */}
-        <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-[#F8F5F0] mb-2">
+        <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-[#1A1A1A] mb-2">
           The Byzantine Route
         </h2>
-        <p className="text-[#F8F5F0]/50 text-sm mb-8">
+        <p className="text-[#1A1A1A]/50 text-sm mb-8">
           The main off-road itinerary. Starts in Mesopotam, ends back at Bistrica River. Full day.
         </p>
 
@@ -103,9 +146,9 @@ export default function ATVPage() {
                 <div className="pb-2">
                   <div className="flex items-baseline gap-2 mb-1">
                     <span className="text-xs text-[#8B5A2B]">{String(i + 1).padStart(2, '0')}</span>
-                    <h3 className="text-[#F8F5F0] font-medium">{wp.name}</h3>
+                    <h3 className="text-[#1A1A1A] font-medium">{wp.name}</h3>
                   </div>
-                  <p className="text-[#F8F5F0]/50 text-sm">{wp.note}</p>
+                  <p className="text-[#1A1A1A]/50 text-sm">{wp.note}</p>
                 </div>
               </div>
             ))}

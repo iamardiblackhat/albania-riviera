@@ -2,14 +2,15 @@
 
 @layer base {
   :root {
-    --color-bg: #1A1A1A;
-    --color-surface: #F8F5F0;
+    --color-bg: #F8F5F0;
+    --color-surface: #FFFFFF;
+    --color-ink: #1A1A1A;
     --color-teal: #2A7F8A;
   }
 
   html {
-    background-color: #1A1A1A;
-    color: #F8F5F0;
+    background-color: #F8F5F0;
+    color: #1A1A1A;
   }
 
   * {
@@ -25,18 +26,31 @@
     display: none;
   }
 
-  /* Leaflet fix */
+  /* Slightly warmer, less washed map tiles */
   .leaflet-container {
-    background: #1A1A1A;
+    background: #F8F5F0;
     font-family: inherit;
   }
 
   .leaflet-tile-pane {
-    filter: grayscale(30%) brightness(0.85);
+    filter: saturate(0.85) contrast(1.02);
+  }
+
+  /* Text sitting on top of a darkened photograph */
+  .on-photo {
+    color: #F8F5F0;
+  }
+
+  ::selection {
+    background: #2A7F8A;
+    color: #F8F5F0;
   }
 }
 
 @theme {
   --font-playfair: 'Playfair Display', Georgia, serif;
   --font-inter: 'Inter', system-ui, sans-serif;
+  --color-paper: #F8F5F0;
+  --color-ink: #1A1A1A;
+  --color-teal: #2A7F8A;
 }

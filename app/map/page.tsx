@@ -12,7 +12,7 @@ export default function MapPage() {
   const [selected, setSelected] = useState<MapPoint | null>(null)
 
   return (
-    <div className="h-screen bg-[#1A1A1A] flex flex-col pt-14">
+    <div className="h-screen bg-[#F8F5F0] flex flex-col pt-14">
       <div className="flex-1 relative">
         <MapComponent onPinClick={setSelected} />
 
@@ -24,17 +24,17 @@ export default function MapPage() {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: 300, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="absolute top-4 right-4 w-72 bg-[#0D0D0D] border border-[#F8F5F0]/10 p-5 z-[400] hidden md:block"
+              className="absolute top-4 right-4 w-72 bg-[#FFFFFF] border border-[#1A1A1A]/10 p-5 z-[400] hidden md:block"
             >
               <button
                 onClick={() => setSelected(null)}
-                className="absolute top-3 right-3 text-[#F8F5F0]/30 p-1 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                className="absolute top-3 right-3 text-[#1A1A1A]/30 p-1 min-w-[44px] min-h-[44px] flex items-center justify-center"
               >
                 ✕
               </button>
               <span className="text-xs text-[#2A7F8A] uppercase tracking-widest block mb-2">{selected.type}</span>
-              <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#F8F5F0] mb-2">{selected.name}</h2>
-              <p className="text-[#F8F5F0]/60 text-sm mb-4">{selected.description}</p>
+              <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#1A1A1A] mb-2">{selected.name}</h2>
+              <p className="text-[#1A1A1A]/60 text-sm mb-4">{selected.description}</p>
               {selected.slug && (
                 <Link
                   href={selected.slug}
@@ -67,13 +67,13 @@ export default function MapPage() {
                 dragConstraints={{ top: 0, bottom: 0 }}
                 onDragEnd={(_, info) => { if (info.offset.y > 80) setSelected(null) }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                className="fixed bottom-0 left-0 right-0 z-[400] bg-[#0D0D0D] border-t border-[#F8F5F0]/10 p-5 md:hidden"
+                className="fixed bottom-0 left-0 right-0 z-[400] bg-[#FFFFFF] border-t border-[#1A1A1A]/10 p-5 md:hidden"
                 style={{ maxHeight: '60vh' }}
               >
-                <div className="w-10 h-1 bg-[#F8F5F0]/20 rounded-full mx-auto mb-4" />
+                <div className="w-10 h-1 bg-[#1A1A1A]/20 rounded-full mx-auto mb-4" />
                 <span className="text-xs text-[#2A7F8A] uppercase tracking-widest block mb-2">{selected.type}</span>
-                <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#F8F5F0] mb-2">{selected.name}</h2>
-                <p className="text-[#F8F5F0]/60 text-sm mb-4">{selected.description}</p>
+                <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#1A1A1A] mb-2">{selected.name}</h2>
+                <p className="text-[#1A1A1A]/60 text-sm mb-4">{selected.description}</p>
                 {selected.slug && (
                   <Link
                     href={selected.slug}

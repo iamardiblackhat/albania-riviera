@@ -42,7 +42,7 @@ const operators = [
 
 export default function BoatsPage() {
   return (
-    <div className="min-h-screen bg-[#1A1A1A]">
+    <div className="min-h-screen bg-[#F8F5F0]">
       <div className="relative h-[60vh] overflow-hidden">
         <Image src={images.boats} alt="Boat tours Albania" fill className="object-cover" priority sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A]/20 to-[#1A1A1A]" />
@@ -54,23 +54,23 @@ export default function BoatsPage() {
 
       <div className="px-4 md:px-8 py-12 max-w-5xl mx-auto">
         <div className="grid grid-cols-2 gap-4 mb-12">
-          <div className="border border-[#F8F5F0]/10 p-5">
-            <h3 className="text-[#F8F5F0] font-medium mb-1">Shared boat</h3>
+          <div className="border border-[#1A1A1A]/10 p-5">
+            <h3 className="text-[#1A1A1A] font-medium mb-1">Shared boat</h3>
             <p className="font-[family-name:var(--font-playfair)] text-2xl" style={{ color: '#5DADE2' }}>£24 to £43</p>
-            <p className="text-[#F8F5F0]/40 text-xs mt-1">per person</p>
+            <p className="text-[#1A1A1A]/40 text-xs mt-1">per person</p>
           </div>
-          <div className="border border-[#F8F5F0]/10 p-5">
-            <h3 className="text-[#F8F5F0] font-medium mb-1">Private charter</h3>
+          <div className="border border-[#1A1A1A]/10 p-5">
+            <h3 className="text-[#1A1A1A] font-medium mb-1">Private charter</h3>
             <p className="font-[family-name:var(--font-playfair)] text-2xl" style={{ color: '#5DADE2' }}>£344 to £430</p>
-            <p className="text-[#F8F5F0]/40 text-xs mt-1">up to 8-10 people</p>
+            <p className="text-[#1A1A1A]/40 text-xs mt-1">up to 8-10 people</p>
           </div>
         </div>
 
         <div className="mb-12">
-          <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#F8F5F0] mb-4">What is included</h2>
+          <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#1A1A1A] mb-4">What is included</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {amenities.map((a) => (
-              <div key={a.label} className="flex items-center gap-2 text-sm text-[#F8F5F0]/70 bg-[#F8F5F0]/5 p-3">
+              <div key={a.label} className="flex items-center gap-2 text-sm text-[#1A1A1A]/70 bg-[#1A1A1A]/5 p-3">
                 <span>{a.icon}</span><span>{a.label}</span>
               </div>
             ))}
@@ -78,15 +78,19 @@ export default function BoatsPage() {
         </div>
 
         <div className="mb-12">
-          <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-[#F8F5F0] mb-2">Northern Route</h2>
-          <p className="text-[#F8F5F0]/50 text-sm mb-6">Turtle Cave, Gremina, Kakome, Krorez Beach. Best for beaches and swimming.</p>
+          <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-[#1A1A1A] mb-2">Northern Route</h2>
+          <p className="text-[#1A1A1A]/50 text-sm mb-6">Turtle Cave, Gremina, Kakome, Krorez Beach. Best for beaches and swimming.</p>
+          <div className="relative h-[36vh] -mx-4 md:-mx-8 mb-8 overflow-hidden">
+            <Image src={images.coast} alt="Northern Riviera coastline" fill className="object-cover" sizes="100vw" />
+            <div className="absolute inset-0 bg-[#1A1A1A]/25" />
+          </div>
           <div className="space-y-4">
             {northernStops.map((stop, i) => (
-              <div key={stop.name} className="flex gap-4 border-b border-[#F8F5F0]/5 pb-4">
+              <div key={stop.name} className="flex gap-4 border-b border-[#1A1A1A]/5 pb-4">
                 <span className="text-xs w-5 flex-shrink-0 mt-0.5" style={{ color: '#5DADE2' }}>{String(i + 1).padStart(2, '0')}</span>
                 <div>
-                  <h3 className="text-[#F8F5F0] text-sm font-medium mb-0.5">{stop.name}</h3>
-                  <p className="text-[#F8F5F0]/50 text-sm">{stop.note}</p>
+                  <h3 className="text-[#1A1A1A] text-sm font-medium mb-0.5">{stop.name}</h3>
+                  <p className="text-[#1A1A1A]/50 text-sm">{stop.note}</p>
                 </div>
               </div>
             ))}
@@ -94,36 +98,46 @@ export default function BoatsPage() {
         </div>
 
         <div className="mb-12">
-          <p className="text-xs text-[#F8F5F0]/40 uppercase tracking-widest mb-2">360 View — Ksamil Islands</p>
+          <p className="text-xs text-[#1A1A1A]/40 uppercase tracking-widest mb-2">360 View — Ksamil Islands</p>
           <PanoramaViewer imageUrl={images.ksamil} fallbackUrl={images.ksamil} label="Ksamil Islands" />
         </div>
 
         <div className="mb-12">
-          <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-[#F8F5F0] mb-2">Southern Route</h2>
-          <p className="text-[#F8F5F0]/50 text-sm mb-6">Pigeon Cave, Mirror Beach, Ksamil Islands. Best for snorkeling.</p>
+          <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-[#1A1A1A] mb-2">Southern Route</h2>
+          <p className="text-[#1A1A1A]/50 text-sm mb-6">Pigeon Cave, Mirror Beach, Ksamil Islands. Best for snorkeling.</p>
+          <div className="relative h-[36vh] -mx-4 md:-mx-8 mb-8 overflow-hidden">
+            <Image src={images.ksamil} alt="Ksamil Islands" fill className="object-cover" sizes="100vw" />
+            <div className="absolute inset-0 bg-[#1A1A1A]/25" />
+          </div>
           <div className="space-y-4">
             {southernStops.map((stop, i) => (
-              <div key={stop.name} className="flex gap-4 border-b border-[#F8F5F0]/5 pb-4">
+              <div key={stop.name} className="flex gap-4 border-b border-[#1A1A1A]/5 pb-4">
                 <span className="text-xs w-5 flex-shrink-0 mt-0.5" style={{ color: '#5DADE2' }}>{String(i + 1).padStart(2, '0')}</span>
                 <div>
-                  <h3 className="text-[#F8F5F0] text-sm font-medium mb-0.5">{stop.name}</h3>
-                  <p className="text-[#F8F5F0]/50 text-sm">{stop.note}</p>
+                  <h3 className="text-[#1A1A1A] text-sm font-medium mb-0.5">{stop.name}</h3>
+                  <p className="text-[#1A1A1A]/50 text-sm">{stop.note}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
+        {/* Harbour band */}
+        <div className="relative h-[34vh] -mx-4 md:-mx-8 mb-12 overflow-hidden">
+          <Image src={images.harbour} alt="Boats in Saranda harbour" fill className="object-cover" sizes="100vw" />
+          <div className="absolute inset-0 bg-[#1A1A1A]/35" />
+        </div>
+
         <div className="mb-12">
-          <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#F8F5F0] mb-4">Operators</h2>
+          <h2 className="font-[family-name:var(--font-playfair)] text-xl text-[#1A1A1A] mb-4">Operators</h2>
           <div className="space-y-3">
             {operators.map((op) => (
               <a key={op.name} href={op.url} target="_blank" rel="noopener noreferrer"
-                className="flex items-baseline justify-between border border-[#F8F5F0]/10 p-4 hover:border-[#5DADE2]/40 transition-colors"
+                className="flex items-baseline justify-between border border-[#1A1A1A]/10 p-4 hover:border-[#5DADE2]/40 transition-colors"
                 data-cursor="hover">
                 <div>
-                  <span className="text-[#F8F5F0] text-sm font-medium block">{op.name}</span>
-                  <span className="text-[#F8F5F0]/40 text-xs">{op.note}</span>
+                  <span className="text-[#1A1A1A] text-sm font-medium block">{op.name}</span>
+                  <span className="text-[#1A1A1A]/40 text-xs">{op.note}</span>
                 </div>
                 <span style={{ color: '#5DADE2' }} className="text-xs">↗</span>
               </a>

@@ -17,10 +17,10 @@ const categories = [
 
 export default function ActivitiesPage() {
   return (
-    <div className="min-h-screen bg-[#1A1A1A]">
+    <div className="min-h-screen bg-[#F8F5F0]">
       <div className="pt-24 pb-8 px-4 md:px-8">
-        <h1 className="font-[family-name:var(--font-playfair)] text-4xl md:text-6xl text-[#F8F5F0]">Activities</h1>
-        <p className="mt-3 text-[#F8F5F0]/50 max-w-lg">Everything to do on the Riviera. Pick a category.</p>
+        <h1 className="font-[family-name:var(--font-playfair)] text-4xl md:text-6xl text-[#1A1A1A]">Activities</h1>
+        <p className="mt-3 text-[#1A1A1A]/50 max-w-lg">Everything to do on the Riviera. Pick a category.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2">
@@ -45,7 +45,7 @@ export default function ActivitiesPage() {
                 {String(i + 1).padStart(2, '0')}
               </span>
               <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-[#F8F5F0] mb-2">{cat.label}</h2>
-              <p className="text-[#F8F5F0]/60 text-sm max-w-xs">{cat.description}</p>
+              <p className="text-[#F8F5F0]/70 text-sm max-w-xs">{cat.description}</p>
             </div>
           </Link>
         ))}

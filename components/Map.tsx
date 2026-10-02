@@ -45,9 +45,10 @@ export default function MapComponent({ onPinClick }: MapComponentProps) {
         zoomControl: false,
       })
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors',
-        maxZoom: 18,
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap contributors © CARTO',
+        subdomains: 'abcd',
+        maxZoom: 19,
       }).addTo(map)
 
       L.control.zoom({ position: 'bottomright' }).addTo(map)
@@ -66,7 +67,8 @@ export default function MapComponent({ onPinClick }: MapComponentProps) {
             transform:rotate(-45deg);
             display:flex;align-items:center;justify-content:center;
             font-size:14px;
-            box-shadow:0 2px 8px rgba(0,0,0,0.4);
+            border:2px solid rgba(255,255,255,0.9);
+            box-shadow:0 3px 10px rgba(26,26,26,0.35);
             opacity:0;
             transition:opacity 0.3s ease ${i * 60}ms;
           " class="pin-${i}">

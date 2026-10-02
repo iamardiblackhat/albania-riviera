@@ -46,13 +46,13 @@ export default function CommentThread({ slug }: { slug: string }) {
   }
 
   return (
-    <section className="mt-16 border-t border-[#F8F5F0]/10 pt-8">
-      <h2 className="font-[family-name:var(--font-playfair)] text-2xl text-[#F8F5F0] mb-6">
+    <section className="mt-16 border-t border-[#1A1A1A]/10 pt-8">
+      <h2 className="font-[family-name:var(--font-playfair)] text-2xl text-[#1A1A1A] mb-6">
         Tips from the group
       </h2>
 
       {comments.length === 0 && !showForm && (
-        <p className="text-[#F8F5F0]/40 text-sm mb-6">No tips yet. Be the first.</p>
+        <p className="text-[#1A1A1A]/40 text-sm mb-6">No tips yet. Be the first.</p>
       )}
 
       <div className="space-y-4 mb-6">
@@ -62,13 +62,13 @@ export default function CommentThread({ slug }: { slug: string }) {
               key={c.id}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-[#F8F5F0]/5 p-4 border-l-2 border-[#2A7F8A]"
+              className="bg-[#1A1A1A]/5 p-4 border-l-2 border-[#2A7F8A]"
             >
               <div className="flex items-baseline gap-2 mb-1">
-                <span className="text-[#F8F5F0] text-sm font-semibold">{c.author}</span>
-                <span className="text-[#F8F5F0]/40 text-xs">{timeAgo(c.ts)}</span>
+                <span className="text-[#1A1A1A] text-sm font-semibold">{c.author}</span>
+                <span className="text-[#1A1A1A]/40 text-xs">{timeAgo(c.ts)}</span>
               </div>
-              <p className="text-[#F8F5F0]/80 text-sm leading-relaxed">{c.body}</p>
+              <p className="text-[#1A1A1A]/80 text-sm leading-relaxed">{c.body}</p>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -98,7 +98,7 @@ export default function CommentThread({ slug }: { slug: string }) {
               onChange={(e) => setName(e.target.value.slice(0, 50))}
               placeholder="Your name"
               required
-              className="w-full bg-[#F8F5F0]/5 border border-[#F8F5F0]/10 text-[#F8F5F0] px-3 py-2 text-sm min-h-[44px] focus:outline-none focus:border-[#2A7F8A] placeholder:text-[#F8F5F0]/30"
+              className="w-full bg-[#1A1A1A]/5 border border-[#1A1A1A]/10 text-[#1A1A1A] px-3 py-2 text-sm min-h-[44px] focus:outline-none focus:border-[#2A7F8A] placeholder:text-[#1A1A1A]/30"
             />
             <div className="relative">
               <textarea
@@ -107,15 +107,15 @@ export default function CommentThread({ slug }: { slug: string }) {
                 placeholder="Your tip..."
                 required
                 rows={3}
-                className="w-full bg-[#F8F5F0]/5 border border-[#F8F5F0]/10 text-[#F8F5F0] px-3 py-2 text-sm focus:outline-none focus:border-[#2A7F8A] placeholder:text-[#F8F5F0]/30 resize-none"
+                className="w-full bg-[#1A1A1A]/5 border border-[#1A1A1A]/10 text-[#1A1A1A] px-3 py-2 text-sm focus:outline-none focus:border-[#2A7F8A] placeholder:text-[#1A1A1A]/30 resize-none"
               />
-              <span className="absolute bottom-2 right-2 text-xs text-[#F8F5F0]/30">{280 - body.length}</span>
+              <span className="absolute bottom-2 right-2 text-xs text-[#1A1A1A]/30">{280 - body.length}</span>
             </div>
             <div className="flex gap-2">
               <button type="submit" className="bg-[#2A7F8A] text-[#F8F5F0] px-4 py-2 text-sm min-h-[44px]">
                 Submit
               </button>
-              <button type="button" onClick={() => setShowForm(false)} className="text-[#F8F5F0]/40 text-sm px-4 py-2 min-h-[44px]">
+              <button type="button" onClick={() => setShowForm(false)} className="text-[#1A1A1A]/40 text-sm px-4 py-2 min-h-[44px]">
                 Cancel
               </button>
             </div>

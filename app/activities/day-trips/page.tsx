@@ -14,6 +14,7 @@ const dayTrips = [
     name: 'Blue Eye (Syri i Kaltër)',
     accent: '#2D6A4F',
     imageKey: 'blue-eye',
+    secondImageKey: 'lakes',
     facts: [
       'Karst spring 22km from Saranda',
       '18,400 litres per second surface from 50m+ deep',
@@ -29,6 +30,7 @@ const dayTrips = [
     name: 'Butrint',
     accent: '#2D6A4F',
     imageKey: 'butrint',
+    secondImageKey: 'coast',
     facts: [
       'UNESCO World Heritage Site',
       'Greek amphitheaters, Roman ruins, Byzantine basilicas, Venetian fortresses',
@@ -42,6 +44,7 @@ const dayTrips = [
     name: 'Gjirokaster',
     accent: '#2D6A4F',
     imageKey: 'gjirokaster',
+    secondImageKey: 'gjirokaster-old',
     facts: [
       'UNESCO World Heritage Site',
       'Known as the City of Stone',
@@ -57,6 +60,7 @@ const dayTrips = [
     name: 'Lekursi Castle Sunset',
     accent: '#2D6A4F',
     imageKey: 'riviera',
+    secondImageKey: 'boats',
     facts: [
       'Hilltop fortress directly above Saranda',
       '180-degree views: Ionian Sea, Saranda Bay, Butrint Lake, Corfu',
@@ -69,7 +73,7 @@ const dayTrips = [
 
 export default function DayTripsPage() {
   return (
-    <div className="min-h-screen bg-[#1A1A1A]">
+    <div className="min-h-screen bg-[#F8F5F0]">
       <div className="relative h-[50vh] overflow-hidden">
         <Image src={images.riviera} alt="Day trips Albania" fill className="object-cover" priority sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A]/20 to-[#1A1A1A]" />
@@ -87,13 +91,13 @@ export default function DayTripsPage() {
                 <span className="text-xs uppercase tracking-widest block mb-3" style={{ color: trip.accent }}>
                   {String(idx + 1).padStart(2, '0')}
                 </span>
-                <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl text-[#F8F5F0] mb-4">
+                <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl text-[#1A1A1A] mb-4">
                   {trip.name}
                 </h2>
-                <p className="text-[#F8F5F0]/70 text-sm leading-relaxed mb-6">{trip.description}</p>
+                <p className="text-[#1A1A1A]/70 text-sm leading-relaxed mb-6">{trip.description}</p>
                 <ul className="space-y-1 mb-4">
                   {trip.facts.map((f) => (
-                    <li key={f} className="text-xs text-[#F8F5F0]/50 flex gap-2">
+                    <li key={f} className="text-xs text-[#1A1A1A]/50 flex gap-2">
                       <span style={{ color: trip.accent }}>—</span>
                       <span>{f}</span>
                     </li>
@@ -101,10 +105,10 @@ export default function DayTripsPage() {
                 </ul>
                 {trip.tourOptions && (
                   <div>
-                    <p className="text-xs text-[#F8F5F0]/40 uppercase tracking-widest mb-2">Tour options</p>
+                    <p className="text-xs text-[#1A1A1A]/40 uppercase tracking-widest mb-2">Tour options</p>
                     <ul className="space-y-1">
                       {trip.tourOptions.map((o) => (
-                        <li key={o} className="text-sm text-[#F8F5F0]/60 flex gap-2">
+                        <li key={o} className="text-sm text-[#1A1A1A]/60 flex gap-2">
                           <span style={{ color: trip.accent }}>•</span>{o}
                         </li>
                       ))}
@@ -119,21 +123,32 @@ export default function DayTripsPage() {
                   </a>
                 )}
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src={images[trip.imageKey as keyof typeof images] || images.riviera}
-                  alt={trip.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+              <div className="space-y-2">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={images[trip.imageKey as keyof typeof images] || images.riviera}
+                    alt={trip.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <Image
+                    src={images[trip.secondImageKey as keyof typeof images] || images.riviera}
+                    alt={`${trip.name} — detail`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
               </div>
             </div>
 
             {/* Panorama on Blue Eye */}
             {trip.name === 'Blue Eye (Syri i Kaltër)' && (
               <div className="mt-8">
-                <p className="text-xs text-[#F8F5F0]/40 uppercase tracking-widest mb-2">360 View</p>
+                <p className="text-xs text-[#1A1A1A]/40 uppercase tracking-widest mb-2">360 View</p>
                 <PanoramaViewer imageUrl={images['blue-eye']} fallbackUrl={images['blue-eye']} label="Blue Eye (Syri i Kaltër)" />
               </div>
             )}
