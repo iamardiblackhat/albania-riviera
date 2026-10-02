@@ -43,10 +43,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body
-        className="bg-[#F8F5F0] text-[#1A1A1A] font-[family-name:var(--font-inter)] antialiased overflow-x-hidden"
-        style={{ cursor: 'none' }}
-      >
+      <body className="bg-[#F8F5F0] text-[#1A1A1A] font-[family-name:var(--font-inter)] antialiased overflow-x-hidden">
         <LanguageProvider>
           <LenisProvider>
             <CustomCursor />
