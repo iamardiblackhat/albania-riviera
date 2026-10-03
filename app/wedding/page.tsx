@@ -1,160 +1,109 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
-import Image from 'next/image'
-import images from '@/data/images.json'
-import { wedding } from '@/data/wedding'
-import CommentThread from '@/components/CommentThread'
-
-const PhotoWall = dynamic(() => import('@/components/PhotoWall'), { ssr: false })
-
-function useCountdown(iso: string) {
-  const [now, setNow] = useState<number | null>(null)
-
-  useEffect(() => {
-    if (!iso) return
-    setNow(Date.now())
-    const t = setInterval(() => setNow(Date.now()), 1000)
-    return () => clearInterval(t)
-  }, [iso])
-
-  if (!iso || now === null) return null
-  const diff = new Date(iso + 'T12:00:00').getTime() - now
-  if (diff <= 0) return null
-
-  return {
-    days: Math.floor(diff / 86400000),
-    hours: Math.floor((diff % 86400000) / 3600000),
-    mins: Math.floor((diff % 3600000) / 60000),
-    secs: Math.floor((diff % 60000) / 1000),
-  }
-}
+import { weddingData } from '@/data/wedding'
 
 export default function WeddingPage() {
-  const countdown = useCountdown(wedding.isoDate)
-  const schedule = wedding.schedule.filter((s) => s.title)
-  const filled = wedding.notes.filter((n) => n.title && n.detail)
-  const notes = filled.length ? filled : wedding.notes.filter((n) => n.title)
-
   return (
-    <div className="min-h-screen bg-[#F8F5F0]">
-
-      {/* Hero */}
-      <section className="relative min-h-[86vh] flex items-end overflow-hidden">
-        <Image src={images.wedding} alt="" fill priority className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0d]/85 via-[#0d0d0d]/30 to-[#0d0d0d]/50" />
-
-        <div className="relative z-10 w-full px-5 md:px-8 pb-10 md:pb-14 text-center">
-          <p className="text-[#F8F5F0]/70 text-[11px] md:text-xs uppercase tracking-[0.35em] mb-5">
-            {wedding.dateLabel}
-          </p>
-          <h1 className="font-[family-name:var(--font-playfair)] leading-[0.9] tracking-tight">
-            <span className="block text-[clamp(2.75rem,13vw,8rem)] text-[#F8F5F0]">{wedding.bride}</span>
-            <span className="block text-[clamp(1.25rem,4vw,2.5rem)] text-[#2A7F8A] italic my-1 md:my-2">&amp;</span>
-            <span className="block text-[clamp(2.75rem,13vw,8rem)] text-[#F8F5F0]">{wedding.groom}</span>
+    <main className="min-h-screen">
+      {/* Hero - Distinct from homepage */}
+      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#F9F5F0] via-[#E8F4F2] to-[#D4E8E4]">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-32 h-32 rounded-full border border-[#2D5F57]" />
+          <div className="absolute bottom-40 right-20 w-24 h-24 rounded-full border border-[#2D5F57]" />
+        </div>
+        
+        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+          <div className="mb-8">
+            <svg width="60" height="60" viewBox="0 0 60 60" className="mx-auto opacity-60">
+              <path d="M10 30 Q30 10 50 30" fill="none" stroke="#2D5F57" strokeWidth="2"/>
+              <circle cx="30" cy="20" r="2" fill="#2D5F57"/>
+            </svg>
+          </div>
+          
+          <h1 className="text-5xl sm:text-7xl font-serif text-[#2D5F57] mb-4">
+            Erda <span className="italic font-light">&</span> Faton
           </h1>
-          <p className="mt-6 text-[#F8F5F0]/70 text-sm tracking-[0.25em] uppercase">
-            {wedding.venue} &middot; {wedding.country}
+          
+          <div className="w-24 h-px bg-[#2D5F57]/40 mx-auto my-8" />
+          
+          <p className="text-xl sm:text-2xl text-gray-700 font-light tracking-wide">
+            October 3, 2026
+          </p>
+          <p className="text-lg text-gray-600 mt-2">Sarandë, Albania</p>
+        </div>
+      </section>
+
+      {/* Details Section */}
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-serif text-gray-900">Celebration Details</h2>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {weddingData.details.map((detail, i) => (
+              <div key={i} className="text-center p-6 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
+                <div className="text-3xl mb-4">{detail.icon}</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{detail.title}</h3>
+                <p className="text-gray-600">{detail.time}</p>
+                <p className="text-gray-500 text-sm mt-1">{detail.location}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Story Section */}
+      <section className="py-20 sm:py-28 bg-gradient-to-b from-[#F9F5F0] to-white">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center">
+          <h2 className="text-3xl sm:text-4xl font-serif text-gray-900 mb-8">Our Story</h2>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            {weddingData.story}
           </p>
         </div>
       </section>
 
-      {/* Countdown */}
-      {countdown && (
-        <section className="border-y border-[#1A1A1A]/10">
-          <div className="mx-auto grid max-w-3xl grid-cols-4 divide-x divide-[#1A1A1A]/10">
-            {[
-              { v: countdown.days, l: 'days' },
-              { v: countdown.hours, l: 'hours' },
-              { v: countdown.mins, l: 'minutes' },
-              { v: countdown.secs, l: 'seconds' },
-            ].map((u) => (
-              <div key={u.l} className="px-2 py-7 text-center">
-                <div className="font-[family-name:var(--font-playfair)] text-3xl md:text-5xl tabular-nums">
-                  {String(u.v).padStart(2, '0')}
-                </div>
-                <div className="mt-1 text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#1A1A1A]/45">
-                  {u.l}
-                </div>
+      {/* Photo Section */}
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-serif text-gray-900">Moments</h2>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {weddingData.photos.map((photo, i) => (
+              <div
+                key={i}
+                className="aspect-square overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow"
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
               </div>
             ))}
           </div>
-        </section>
-      )}
-
-      {/* Order of the day */}
-      {schedule.length > 0 && (
-        <section className="px-5 md:px-8 py-16 md:py-24">
-          <div className="mx-auto max-w-2xl">
-            <p className="text-[11px] uppercase tracking-[0.3em] text-[#2A7F8A] mb-2">The day</p>
-            <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-5xl mb-10">
-              Order of the day
-            </h2>
-            <ol>
-              {schedule.map((s, i) => (
-                <li key={i} className="relative flex gap-5 pb-8 last:pb-0">
-                  {i < schedule.length - 1 && (
-                    <span
-                      className="absolute left-[7px] top-5 bottom-0 w-px bg-[#1A1A1A]/12"
-                      aria-hidden
-                    />
-                  )}
-                  <span className="relative mt-1.5 h-3.5 w-3.5 shrink-0 rounded-full border-2 border-[#2A7F8A] bg-[#F8F5F0]" />
-                  <div className="flex-1">
-                    {s.time && (
-                      <p className="text-[11px] uppercase tracking-[0.2em] text-[#1A1A1A]/45 mb-1">
-                        {s.time}
-                      </p>
-                    )}
-                    <h3 className="font-[family-name:var(--font-playfair)] text-xl md:text-2xl">{s.title}</h3>
-                    {s.detail && <p className="mt-1 text-sm text-[#1A1A1A]/60">{s.detail}</p>}
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-      )}
-
-      {/* Guest notes */}
-      {notes.length > 0 && (
-        <section className="px-5 md:px-8 pb-16 md:pb-24">
-          <div className="mx-auto max-w-5xl grid gap-px bg-[#1A1A1A]/10 sm:grid-cols-2 lg:grid-cols-4">
-            {notes.map((n) => (
-              <div key={n.title} className="bg-[#F8F5F0] p-6">
-                <h3 className="text-[11px] uppercase tracking-[0.2em] text-[#2A7F8A] mb-2">{n.title}</h3>
-                <p className="text-sm text-[#1A1A1A]/65 leading-relaxed">{n.detail || 'Coming soon'}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Message */}
-      {wedding.message && (
-        <section className="px-5 md:px-8 pb-16 md:pb-24">
-          <div className="mx-auto max-w-2xl border-t border-[#1A1A1A]/12 pt-10">
-            <p className="font-[family-name:var(--font-playfair)] text-xl md:text-2xl italic leading-relaxed text-[#1A1A1A]/75">
-              {wedding.message}
-            </p>
-          </div>
-        </section>
-      )}
-
-      {/* Photos */}
-      <section className="border-t border-[#1A1A1A]/10 px-5 md:px-8 py-12 md:py-16">
-        <div className="mx-auto max-w-5xl">
-          <PhotoWall />
         </div>
       </section>
 
-      {/* Guestbook */}
-      <section className="px-5 md:px-8 pb-16 md:pb-24">
-        <div className="mx-auto max-w-2xl">
-          <CommentThread slug="wedding" />
+      {/* CTA */}
+      <section className="py-20 bg-gradient-to-br from-[#2D5F57] to-[#3A7A6E]">
+        <div className="mx-auto max-w-3xl px-4 text-center">
+          <h2 className="text-3xl sm:text-4xl font-serif text-white mb-6">
+            Can't Wait to Celebrate With You
+          </h2>
+          <p className="text-white/90 text-lg mb-8">
+            Your presence is the greatest gift. For any questions, reach out anytime.
+          </p>
+          <a
+            href="mailto:example@email.com"
+            className="inline-block px-8 py-4 bg-white text-[#2D5F57] rounded-lg font-semibold hover:bg-white/90 transition-colors"
+          >
+            Get in Touch
+          </a>
         </div>
       </section>
-    </div>
+    </main>
   )
 }
