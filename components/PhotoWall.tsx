@@ -1,40 +1,45 @@
 'use client'
 
-// Simple photo wall — paste a Google Photos shared album link
-// to show photos from the wedding. No backend, no keys, no uploads.
-// Alternatively upgrade later with Supabase storage.
+/**
+ * Photo wall. If an album URL is supplied we link out to a shared album
+ * (Google Photos / iCloud / Dropbox). Otherwise we invite guests to add one.
+ * No accounts, no API keys, no uploads handled by this app.
+ */
 
-const ALBUM_URL = '' // paste your Google Photos shared album URL here
+interface PhotoWallProps {
+  albumUrl?: string
+}
 
-export default function PhotoWall() {
+export default function PhotoWall({ albumUrl = '' }: PhotoWallProps) {
   return (
-    <section className="mt-16 border-t border-[#1A1A1A]/10 pt-8">
-      <h2 className="font-[family-name:var(--font-playfair)] text-2xl text-[#1A1A1A] mb-4">
-        Wedding Photos
-      </h2>
+    <div>
+      <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl mb-2">Photos</h2>
+      <p className="text-sm text-[#1A1A1A]/55 mb-6 max-w-prose">
+        Everyone has photos. The best ones will be taken by you, not by us.
+      </p>
 
-      {ALBUM_URL ? (
+      {albumUrl ? (
         <a
-          href={ALBUM_URL}
+          href={albumUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 border border-[#2A7F8A] text-[#2A7F8A] px-6 py-4 text-sm hover:bg-[#2A7F8A] hover:text-[#F8F5F0] transition-colors min-h-[44px]"
-          data-cursor="hover"
+          className="inline-flex items-center gap-3 border border-[#2A7F8A] text-[#2A7F8A] px-6 py-3 text-sm hover:bg-[#2A7F8A] hover:text-[#F8F5F0] transition-colors min-h-[44px]"
         >
-          <span>📷</span>
-          <span>View the wedding photo album</span>
-          <span>↗</span>
+          Open the photo album
+          <span aria-hidden>&rarr;</span>
         </a>
       ) : (
-        <div className="border border-dashed border-[#1A1A1A]/20 p-8 text-center">
-          <p className="text-[#1A1A1A]/40 text-sm mb-2">
-            Create a shared Google Photos album during the wedding.
+        <div className="border border-dashed border-[#1A1A1A]/20 p-6 max-w-prose">
+          <p className="text-sm text-[#1A1A1A]/70 mb-3">
+            Make a shared album during the wedding and everyone can add to it. Google Photos, iCloud
+            and Dropbox all work.
           </p>
-          <p className="text-[#1A1A1A]/30 text-xs">
-            Then paste the link into <code className="text-[#2A7F8A]">components/PhotoWall.tsx</code>
+          <p className="text-xs text-[#1A1A1A]/45">
+            Paste the link into <code className="text-[#2A7F8A]">data/wedding.ts</code> as{' '}
+            <code className="text-[#2A7F8A]">photoAlbumUrl</code>.
           </p>
         </div>
       )}
-    </section>
+    </div>
   )
 }

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import images from '@/data/images.json'
 import CommentThread from '@/components/CommentThread'
-import PanoramaViewer from '@/components/PanoramaViewer'
+import PhotoSpot from '@/components/PhotoSpot'
 
 export const metadata: Metadata = {
   title: 'Day Trips — Albania Riviera',
@@ -145,11 +145,14 @@ export default function DayTripsPage() {
               </div>
             </div>
 
-            {/* Panorama on Blue Eye */}
             {trip.name === 'Blue Eye (Syri i Kaltër)' && (
               <div className="mt-8">
-                <p className="text-xs text-[#1A1A1A]/40 uppercase tracking-widest mb-2">360 View</p>
-                <PanoramaViewer imageUrl={images['blue-eye']} fallbackUrl={images['blue-eye']} label="Blue Eye (Syri i Kaltër)" />
+                <PhotoSpot
+                  src={images['blue-eye']}
+                  alt="Blue Eye spring"
+                  caption="Syri i Kaltër. The water is colder than you expect."
+                  height="h-[40vh] md:h-[50vh]"
+                />
               </div>
             )}
           </div>

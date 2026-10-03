@@ -23,12 +23,12 @@ export default function ActivitiesPage() {
         <p className="mt-3 text-[#1A1A1A]/50 max-w-lg">Everything to do on the Riviera. Pick a category.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1.5">
         {categories.map((cat, i) => (
           <Link
             key={cat.href}
             href={cat.href}
-            className="group relative block h-[70vh] md:h-[60vh] overflow-hidden"
+            className="group relative block aspect-[3/4] overflow-hidden"
             data-cursor="hover"
           >
             <Image
@@ -36,16 +36,16 @@ export default function ActivitiesPage() {
               alt={cat.label}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 768px) 50vw, 25vw"
               priority={i < 2}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/90 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <span className="text-xs uppercase tracking-widest block mb-2" style={{ color: cat.accent }}>
+            <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
+              <span className="text-xs uppercase tracking-widest block mb-1" style={{ color: cat.accent }}>
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <h2 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-[#F8F5F0] mb-2">{cat.label}</h2>
-              <p className="text-[#F8F5F0]/70 text-sm max-w-xs">{cat.description}</p>
+              <h2 className="font-[family-name:var(--font-playfair)] text-base md:text-xl text-[#F8F5F0] mb-2">{cat.label}</h2>
+              <p className="text-[#F8F5F0]/70 text-xs max-w-[200px]">{cat.description}</p>
             </div>
           </Link>
         ))}

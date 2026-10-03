@@ -25,18 +25,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Albania Riviera — Erda & Faton 2026',
     description: 'Activities, restaurants, boat tours, and the wedding of Erda and Faton on the Albanian Riviera.',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Albanian_Riviera_form_Llogara_panorama.JPG/1280px-Albanian_Riviera_form_Llogara_panorama.JPG',
-    ],
+    images: ['/img/hero.jpg'],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Albania Riviera — Erda & Faton 2026',
     description: 'Activities, restaurants, boat tours, and the wedding of Erda and Faton.',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Albanian_Riviera_form_Llogara_panorama.JPG/1280px-Albanian_Riviera_form_Llogara_panorama.JPG',
-    ],
+    images: ['/img/hero.jpg'],
   },
 }
 

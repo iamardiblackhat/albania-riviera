@@ -2,23 +2,10 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'upload.wikimedia.org',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '*.supabase.co',
-      },
-    ],
+    // Local sources are 1400px max, so cap derivatives there.
+    deviceSizes: [640, 828, 1080, 1400],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
-  // Allow three.js addons to be imported
-  transpilePackages: ['three'],
 }
 
 export default nextConfig

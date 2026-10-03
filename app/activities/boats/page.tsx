@@ -2,7 +2,7 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import images from '@/data/images.json'
 import CommentThread from '@/components/CommentThread'
-import PanoramaViewer from '@/components/PanoramaViewer'
+import PhotoSpot from '@/components/PhotoSpot'
 
 export const metadata: Metadata = {
   title: 'Boat Tours — Albania Riviera',
@@ -98,8 +98,13 @@ export default function BoatsPage() {
         </div>
 
         <div className="mb-12">
-          <p className="text-xs text-[#1A1A1A]/40 uppercase tracking-widest mb-2">360 View — Ksamil Islands</p>
-          <PanoramaViewer imageUrl={images.ksamil} fallbackUrl={images.ksamil} label="Ksamil Islands" />
+          <p className="text-[11px] uppercase tracking-[0.2em] text-[#2A7F8A] mb-1">Ksamil Islands</p>
+          <PhotoSpot
+            src={images.ksamil}
+            alt="Ksamil Islands"
+            caption="Three uninhabited islets. You can wade between them."
+            height="h-[44vh] md:h-[54vh]"
+          />
         </div>
 
         <div className="mb-12">
