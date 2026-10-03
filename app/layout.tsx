@@ -4,8 +4,6 @@ import './globals.css'
 import { LanguageProvider } from '@/context/LanguageContext'
 import Navbar from '@/components/Navbar'
 import LenisProvider from '@/components/LenisProvider'
-import CustomCursor from '@/components/CustomCursor'
-import GrainOverlay from '@/components/GrainOverlay'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -42,8 +40,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-[#F8F5F0] text-[#1A1A1A] font-[family-name:var(--font-inter)] antialiased overflow-x-hidden">
         <LanguageProvider>
           <LenisProvider>
-            <CustomCursor />
-            <GrainOverlay />
             <Navbar />
             <main>{children}</main>
           </LenisProvider>

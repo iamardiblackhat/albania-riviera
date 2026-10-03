@@ -18,15 +18,6 @@
        so SSR and client markup stay identical. */
     background-color: #F8F5F0;
     color: #1A1A1A;
-    /* The real cursor is swapped for a custom one on precise pointers. */
-    cursor: none;
-  }
-
-  /* Touch and pen devices keep the native cursor. */
-  @media (pointer: coarse) {
-    body {
-      cursor: auto;
-    }
   }
 
   * {
