@@ -1,41 +1,29 @@
-/**
- * Wedding details. EDIT THIS FILE — the /wedding page renders entirely from here.
- * Any field left as an empty string simply does not render.
- */
-
-export const wedding = {
-  bride: 'Erda',
-  groom: 'Faton',
-  /** Shown under the names. */
-  dateLabel: 'October 3, 2026',
-  /**
-   * ISO date (YYYY-MM-DD) if you know it. This switches on the live
-   * countdown. Leave as '' until confirmed and the page just shows dateLabel.
-   */
-  isoDate: '2026-10-03',
-  venue: 'Saranda, Albania',
-  country: 'Albania',
-
-  /**
-   * Order of the day. `time` is optional.
-   * Add, remove or reorder freely.
-   */
-  schedule: [
-    { time: '', title: 'Ceremony', detail: '' },
-    { time: '', title: 'Drinks and photographs', detail: '' },
-    { time: '', title: 'Dinner', detail: '' },
-    { time: '', title: 'Dancing', detail: '' },
+export const weddingData = {
+  details: [
+    {
+      icon: '💍',
+      title: 'Ceremony',
+      time: '4:00 PM',
+      location: 'Sarandë Waterfront',
+    },
+    {
+      icon: '🍽️',
+      title: 'Reception',
+      time: '6:00 PM',
+      location: 'Beachside Venue',
+    },
+    {
+      icon: '🎉',
+      title: 'Celebration',
+      time: '9:00 PM',
+      location: 'Dancing Under Stars',
+    },
   ],
-
-  /** Short practical notes for guests. Empty strings are skipped. */
-  notes: [
-    { title: 'Dress', detail: '' },
-    { title: 'Getting there', detail: 'Saranda is about 40 minutes from Corfu airport.' },
-    { title: 'Money', detail: 'Take cash. Plenty of places do not take cards.' },
-    { title: 'Sun', detail: 'Bring sunscreen. It is hotter than you expect.' },
+  story: 'We are overjoyed to share this special day with our closest family and friends. After years of adventures together, we are excited to begin our next chapter surrounded by the people we love most.',
+  photos: [
+    { src: '/img/coast.jpg', alt: 'Sarandë coast' },
+    { src: '/img/riviera.jpg', alt: 'Albanian Riviera' },
+    { src: '/img/harbour.jpg', alt: 'Harbour view' },
+    { src: '/img/blue-eye.jpg', alt: 'Blue Eye spring' },
   ],
-
-  message: '',
 }
-
-export type Wedding = typeof wedding
