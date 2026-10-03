@@ -1,45 +1,58 @@
 'use client'
 
+import { useRef, useState } from 'react'
+
 /**
- * Photo wall. If an album URL is supplied we link out to a shared album
- * (Google Photos / iCloud / Dropbox). Otherwise we invite guests to add one.
- * No accounts, no API keys, no uploads handled by this app.
+ * Direct photo sharing with no backend: guests pick photos and the
+ * device share sheet sends them straight to the group chat / album.
+ * Falls back to a WhatsApp hint on desktop.
  */
+export default function PhotoWall() {
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [status, setStatus] = useState('')
 
-interface PhotoWallProps {
-  albumUrl?: string
-}
+  async function handleFiles(files: FileList | null) {
+    if (!files || files.length === 0) return
+    const images = Array.from(files).filter((f) => f.type.startsWith('image/'))
+    if (images.length === 0) return
 
-export default function PhotoWall({ albumUrl = '' }: PhotoWallProps) {
+    setStatus(`Sharing ${images.length} photo${images.length > 1 ? 's' : ''}...`)
+    try {
+      if (navigator.canShare && navigator.canShare({ files: images })) {
+        await navigator.share({ files: images, title: 'Wedding photos' })
+        setStatus('Thanks!')
+      } else {
+        setStatus('Your phone cannot share files directly. Send them in the group WhatsApp instead.')
+      }
+    } catch {
+      setStatus('')
+    }
+  }
+
   return (
     <div>
       <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl mb-2">Photos</h2>
       <p className="text-sm text-[#1A1A1A]/55 mb-6 max-w-prose">
-        Everyone has photos. The best ones will be taken by you, not by us.
+        The best shots will be taken by you. Pick your favourites and send them straight to the group
+        WhatsApp — no upload, no account.
       </p>
 
-      {albumUrl ? (
-        <a
-          href={albumUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 border border-[#2A7F8A] text-[#2A7F8A] px-6 py-3 text-sm hover:bg-[#2A7F8A] hover:text-[#F8F5F0] transition-colors min-h-[44px]"
-        >
-          Open the photo album
-          <span aria-hidden>&rarr;</span>
-        </a>
-      ) : (
-        <div className="border border-dashed border-[#1A1A1A]/20 p-6 max-w-prose">
-          <p className="text-sm text-[#1A1A1A]/70 mb-3">
-            Make a shared album during the wedding and everyone can add to it. Google Photos, iCloud
-            and Dropbox all work.
-          </p>
-          <p className="text-xs text-[#1A1A1A]/45">
-            Paste the link into <code className="text-[#2A7F8A]">data/wedding.ts</code> as{' '}
-            <code className="text-[#2A7F8A]">photoAlbumUrl</code>.
-          </p>
-        </div>
-      )}
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        multiple
+        className="hidden"
+        onChange={(e) => handleFiles(e.target.files)}
+      />
+
+      <button
+        onClick={() => inputRef.current?.click()}
+        className="inline-flex items-center gap-3 border border-[#2A7F8A] text-[#2A7F8A] px-6 py-3 text-sm hover:bg-[#2A7F8A] hover:text-[#F8F5F0] transition-colors min-h-[44px]"
+      >
+        Share your wedding photos
+      </button>
+      {status && <p className="mt-3 text-sm text-[#1A1A1A]/60">{status}</p>}
     </div>
   )
 }

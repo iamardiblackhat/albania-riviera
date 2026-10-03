@@ -36,11 +36,6 @@ export const wedding = {
   ],
 
   message: '',
-
-  /**
-   * Paste a Google Photos shared album link here and the photo wall links to it.
-   */
-  photoAlbumUrl: '',
 }
 
 export type Wedding = typeof wedding

@@ -145,7 +145,7 @@ export default function WeddingPage() {
       {/* Photos */}
       <section className="border-t border-[#1A1A1A]/10 px-5 md:px-8 py-12 md:py-16">
         <div className="mx-auto max-w-5xl">
-          <PhotoWall albumUrl={wedding.photoAlbumUrl} />
+          <PhotoWall />
         </div>
       </section>
 
