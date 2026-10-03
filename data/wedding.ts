@@ -7,12 +7,12 @@ export const wedding = {
   bride: 'Erda',
   groom: 'Faton',
   /** Shown under the names. */
-  dateLabel: 'Summer 2026',
+  dateLabel: 'October 3, 2026',
   /**
    * ISO date (YYYY-MM-DD) if you know it. This switches on the live
    * countdown. Leave as '' until confirmed and the page just shows dateLabel.
    */
-  isoDate: '',
+  isoDate: '2026-10-03',
   venue: 'Saranda, Albania',
   country: 'Albania',
 
